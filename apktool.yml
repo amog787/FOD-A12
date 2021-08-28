@@ -1,0 +1,38 @@
+!!brut.androlib.meta.MetaInfo
+apkFileName: services.jar
+compressionType: false
+doNotCompress:
+- classes.dex
+- META-INF/MANIFEST.MF
+isFrameworkApk: false
+packageInfo: null
+sdkInfo: null
+sharedLibrary: false
+sparseResources: false
+unknownFiles:
+  com/android/internal/util/ArrayUtils.uau: '8'
+  com/android/internal/util/FastPrintWriter.uau: '8'
+  com/android/internal/util/FastXmlSerializer.uau: '8'
+  com/android/internal/util/Preconditions.uau: '8'
+  com/android/internal/util/XmlUtils.uau: '8'
+  com/android/server/TelephonyRegistry_compat_config.xml: '8'
+  com/android/server/am/ActiveServices_compat_config.xml: '8'
+  com/android/server/am/OomAdjuster_compat_config.xml: '8'
+  com/android/server/am/ProcessList_compat_config.xml: '8'
+  com/android/server/backup/utils/BackupEligibilityRules_compat_config.xml: '8'
+  com/android/server/compat/CompatChange_compat_config.xml: '8'
+  com/android/server/devicepolicy/DevicePolicyManagerService_compat_config.xml: '8'
+  com/android/server/display/DisplayManagerService_compat_config.xml: '8'
+  com/android/server/location/contexthub/ContextHubClientBroker_compat_config.xml: '8'
+  com/android/server/notification/NotificationManagerService_compat_config.xml: '8'
+  com/android/server/pm/PackageManagerService_compat_config.xml: '8'
+  com/android/server/pm/SELinuxMMAC_compat_config.xml: '8'
+  com/android/server/pm/parsing/library/AndroidTestBaseUpdater_compat_config.xml: '8'
+  com/android/server/pm/permission/PermissionManagerService_compat_config.xml: '8'
+  com/android/server/pm/verify/domain/DomainVerificationCollector_compat_config.xml: '8'
+  com/android/server/pm/verify/domain/DomainVerificationService_compat_config.xml: '8'
+  com/android/server/statusbar/StatusBarManagerService_compat_config.xml: '8'
+  com/android/server/wm/CompatModePackages_compat_config.xml: '8'
+usesFramework: null
+version: 2.5.0
+versionInfo: null
