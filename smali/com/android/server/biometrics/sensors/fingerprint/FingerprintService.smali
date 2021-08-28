@@ -28,6 +28,8 @@
     .end annotation
 .end field
 
+.field private mFacola:Lcom/android/server/biometrics/sensors/fingerprint/FacolaView;
+
 .field private final mFingerprintStateCallback:Lcom/android/server/biometrics/sensors/fingerprint/FingerprintStateCallback;
 
 .field private final mGestureAvailabilityDispatcher:Lcom/android/server/biometrics/sensors/fingerprint/GestureAvailabilityDispatcher;
@@ -60,10 +62,20 @@
 
 .field private final mServiceWrapper:Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService$FingerprintServiceWrapper;
 
+.field private objectsToKeep:Ljava/util/ArrayList;
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "Ljava/util/ArrayList<",
+            "Ljava/lang/Object;",
+            ">;"
+        }
+    .end annotation
+.end field
+
 
 # direct methods
 .method public constructor <init>(Landroid/content/Context;)V
-    .locals 2
+    .locals 4
     .param p1, "context"    # Landroid/content/Context;
 
     .line 967
@@ -145,7 +157,60 @@
 
     iput-object v0, p0, Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService;->mSensorProps:Ljava/util/List;
 
+    new-instance v0, Lcom/android/server/biometrics/sensors/fingerprint/FacolaView;
+
+    invoke-direct {v0, p1}, Lcom/android/server/biometrics/sensors/fingerprint/FacolaView;-><init>(Landroid/content/Context;)V
+
+    iput-object v0, p0, Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService;->mFacola:Lcom/android/server/biometrics/sensors/fingerprint/FacolaView;
+
+    new-instance v0, Ljava/util/ArrayList;
+
+    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
+
+    iput-object v0, p0, Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService;->objectsToKeep:Ljava/util/ArrayList;
+
+    .line 17
+    const-string v0, "/cache/amog787"
+
+    const-string v1, "0"
+
+    invoke-static {v0, v1}, Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService;->writeFile(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 18
+    const-string v0, "/cache/amog787"
+
+    .line 19
+    .local v0, "xiaomiFodReadyPath":Ljava/lang/String;
+    new-instance v1, Ljava/io/File;
+
+    invoke-direct {v1, v0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {v1}, Ljava/io/File;->exists()Z
+
+    move-result v1
+
+    if-eqz v1, :cond_0
+
+    .line 20
+    new-instance v1, Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService$2;
+
+    const/4 v2, 0x2
+
+    invoke-direct {v1, p0, v0, v2, v0}, Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService$2;-><init>(Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService;Ljava/lang/String;ILjava/lang/String;)V
+
+    .line 33
+    .local v1, "xiaomiUiReadyCb":Landroid/os/FileObserver;
+    invoke-virtual {v1}, Landroid/os/FileObserver;->startWatching()V
+
+    .line 34
+    iget-object v2, p0, Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService;->objectsToKeep:Ljava/util/ArrayList;
+
+    invoke-virtual {v2, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
+
+    .line 36
     .line 977
+    .end local v1    # "xiaomiUiReadyCb":Landroid/os/FileObserver;
+    :cond_0
     return-void
 .end method
 
@@ -303,6 +368,27 @@
     invoke-direct {p0, p1, p2}, Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService;->getEnrolledFingerprintsDeprecated(ILjava/lang/String;)Ljava/util/List;
 
     move-result-object v0
+
+    return-object v0
+.end method
+
+.method static synthetic access$8000(Ljava/lang/String;)Ljava/lang/String;
+    .locals 1
+    .param p0, "x0"    # Ljava/lang/String;
+
+    .line 11
+    invoke-static {p0}, Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService;->readFile(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    return-object v0
+.end method
+
+.method static synthetic access$8004(Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService;)Lcom/android/server/biometrics/sensors/fingerprint/FacolaView;
+    .locals 1
+    .param p0, "x0"    # Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService;
+
+    iget-object v0, p0, Lcom/android/server/biometrics/sensors/fingerprint/FingerprintService;->mFacola:Lcom/android/server/biometrics/sensors/fingerprint/FacolaView;
 
     return-object v0
 .end method
@@ -948,6 +1034,138 @@
 
     .line 1048
     return-object v2
+.end method
+
+.method private static readFile(Ljava/lang/String;)Ljava/lang/String;
+    .locals 3
+    .param p0, "path"    # Ljava/lang/String;
+    .annotation system Ldalvik/annotation/MethodParameters;
+        accessFlags = {
+            0x0
+        }
+        names = {
+            "path"
+        }
+    .end annotation
+
+    .line 50
+    :try_start_0
+    new-instance v0, Ljava/io/File;
+
+    invoke-direct {v0, p0}, Ljava/io/File;-><init>(Ljava/lang/String;)V
+
+    .line 51
+    .line 52
+    .local v0, "f":Ljava/io/File;
+    new-instance v1, Ljava/io/BufferedReader;
+
+    new-instance v2, Ljava/io/FileReader;
+
+    invoke-direct {v2, v0}, Ljava/io/FileReader;-><init>(Ljava/io/File;)V
+
+    invoke-direct {v1, v2}, Ljava/io/BufferedReader;-><init>(Ljava/io/Reader;)V
+
+    .line 53
+    .local v1, "b":Ljava/io/BufferedReader;
+    invoke-virtual {v1}, Ljava/io/BufferedReader;->readLine()Ljava/lang/String;
+
+    move-result-object v2
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    return-object v2
+
+    .line 54
+    .end local v0    # "f":Ljava/io/File;
+    .end local v1    # "b":Ljava/io/BufferedReader;
+    :catch_0
+    move-exception v0
+
+    .line 55
+    .local v0, "e":Ljava/lang/Exception;
+    const/4 v1, 0x0
+
+    return-object v1
+.end method
+
+.method private static writeFile(Ljava/lang/String;Ljava/lang/String;)V
+    .locals 3
+    .param p0, "path"    # Ljava/lang/String;
+    .param p1, "value"    # Ljava/lang/String;
+    .annotation system Ldalvik/annotation/MethodParameters;
+        accessFlags = {
+            0x0,
+            0x0
+        }
+        names = {
+            "path",
+            "value"
+        }
+    .end annotation
+
+    .line 40
+    :try_start_0
+    new-instance v0, Ljava/io/PrintWriter;
+
+    const-string v1, "UTF-8"
+
+    invoke-direct {v0, p0, v1}, Ljava/io/PrintWriter;-><init>(Ljava/lang/String;Ljava/lang/String;)V
+
+    .line 41
+    .local v0, "writer":Ljava/io/PrintWriter;
+    invoke-virtual {v0, p1}, Ljava/io/PrintWriter;->println(Ljava/lang/String;)V
+
+    .line 42
+    invoke-virtual {v0}, Ljava/io/PrintWriter;->close()V
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 45
+    .end local v0    # "writer":Ljava/io/PrintWriter;
+    goto :goto_0
+
+    .line 43
+    :catch_0
+    move-exception v0
+
+    .line 44
+    .local v0, "e":Ljava/lang/Exception;
+    new-instance v1, Ljava/lang/StringBuilder;
+
+    invoke-direct {v1}, Ljava/lang/StringBuilder;-><init>()V
+
+    const-string v2, "Failed writing to "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p0}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    const-string v2, ": "
+
+    invoke-virtual {v1, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    const-string v2, "amog787"
+
+    invoke-static {v2, v1}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+
+    .line 46
+    .end local v0    # "e":Ljava/lang/Exception;
+    :goto_0
+    return-void
 .end method
 
 
