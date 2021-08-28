@@ -669,6 +669,23 @@
 
     .line 296
     :cond_1
+    iget-object v1, p0, Lcom/android/server/lights/LightsService$LightImpl;->mHwLight:Landroid/hardware/light/HwLight;
+
+    iget v1, v1, Landroid/hardware/light/HwLight;->id:I
+
+    if-nez v1, :cond_2
+
+    sget-object v1, Lcom/android/server/lights/LightsService;->backlightChangeListener:Lcom/android/server/lights/LightsService$OnBacklightChange;
+
+    if-eqz v1, :cond_2
+
+    sget-object v1, Lcom/android/server/lights/LightsService;->backlightChangeListener:Lcom/android/server/lights/LightsService$OnBacklightChange;
+
+    float-to-int v2, p1
+
+    invoke-interface {v1, v2}, Lcom/android/server/lights/LightsService$OnBacklightChange;->onBacklightChange(I)V
+
+    :cond_2
     invoke-static {p1}, Lcom/android/internal/display/BrightnessSynchronizer;->brightnessFloatToInt(F)I
 
     move-result v0

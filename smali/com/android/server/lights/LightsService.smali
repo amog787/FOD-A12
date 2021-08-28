@@ -18,6 +18,8 @@
 
 .field static final TAG:Ljava/lang/String; = "LightsService"
 
+.field public static backlightChangeListener:Lcom/android/server/lights/LightsService$OnBacklightChange;
+
 
 # instance fields
 .field private mH:Landroid/os/Handler;
@@ -27,6 +29,7 @@
         value = {
             "Landroid/util/SparseArray<",
             "Lcom/android/server/lights/LightsService$LightImpl;",
+            "Lcom/android/server/lights/LightsService$OnBacklightChange;",
             ">;"
         }
     .end annotation
