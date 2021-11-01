@@ -171,6 +171,8 @@
     iput p1, p0, Lcom/android/systemui/biometrics/UdfpsView;->mHbmType:I
 
     :goto_1
+    const/4 v1, 0x0
+    iput v1, p0, Lcom/android/systemui/biometrics/UdfpsView;->mHbmType:I
     return-void
 
     .line 80

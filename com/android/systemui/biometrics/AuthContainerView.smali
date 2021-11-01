@@ -1124,7 +1124,7 @@
 
     const/4 v2, -0x1
 
-    const/16 v3, 0x7e1
+    const/16 v3, 0x7ea
 
     const v4, 0x1002000
 
