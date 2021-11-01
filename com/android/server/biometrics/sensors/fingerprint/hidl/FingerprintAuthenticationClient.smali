@@ -743,3 +743,33 @@
 
     return-object v0
 .end method
+
+.method public onAcquired(II)V
+    .locals 2
+
+    .line 102
+    invoke-super {p0, p1, p2}, Lcom/android/server/biometrics/sensors/AuthenticationClient;->onAcquired(II)V
+
+    .line 104
+    :try_start_0
+    iget-object v0, p0, Lcom/android/server/biometrics/sensors/fingerprint/hidl/FingerprintAuthenticationClient;->mUdfpsOverlayController:Landroid/hardware/fingerprint/IUdfpsOverlayController;
+
+    invoke-virtual {p0}, Lcom/android/server/biometrics/sensors/fingerprint/hidl/FingerprintAuthenticationClient;->getSensorId()I
+
+    move-result v1
+
+    invoke-interface {v0, v1, p1, p2}, Landroid/hardware/fingerprint/IUdfpsOverlayController;->onAcquired(III)V
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    .line 106
+    goto :goto_0
+
+    .line 105
+    :catch_0
+    move-exception p1
+
+    .line 107
+    :goto_0
+    return-void
+.end method
