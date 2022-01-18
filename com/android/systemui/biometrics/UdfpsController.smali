@@ -77,6 +77,8 @@
 
 .field private mOnFingerDown:Z
 
+.field private final mMainHandler:Landroid/os/Handler;
+
 .field private final mOnHoverListener:Landroid/view/View$OnHoverListener;
     .annotation build Landroid/annotation/SuppressLint;
         value = {
